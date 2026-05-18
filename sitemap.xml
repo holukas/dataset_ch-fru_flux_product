@@ -5,10 +5,7 @@
     <loc>http://localhost:3000</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/data-description</loc>
-  </url>
-  <url>
-    <loc>http://localhost:3000/meteoscreening</loc>
+    <loc>http://localhost:3000/placeholder2</loc>
   </url>
   <url>
     <loc>http://localhost:3000/downloadmeteo-2021-2024-db-processed-meteoscreenin</loc>
@@ -165,23 +162,5 @@
   </url>
   <url>
     <loc>http://localhost:3000/ts-gf1-1-2-2021-2024</loc>
-  </url>
-  <url>
-    <loc>http://localhost:3000/outlier-detection</loc>
-  </url>
-  <url>
-    <loc>http://localhost:3000/outlier-detection-1</loc>
-  </url>
-  <url>
-    <loc>http://localhost:3000/gapfilling</loc>
-  </url>
-  <url>
-    <loc>http://localhost:3000/gapfilling-1</loc>
-  </url>
-  <url>
-    <loc>http://localhost:3000/final-dataset</loc>
-  </url>
-  <url>
-    <loc>http://localhost:3000/final-dataset-1</loc>
   </url>
 </urlset>
