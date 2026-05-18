@@ -97,7 +97,9 @@ myst = {
     },
     "site": {
         "template": "book-theme",
-        "base_url": "/dataset_ch-fru_flux_product",
+        "options": {
+            "base_url": "/dataset_ch-fru_flux_product",
+        },
     },
 }
 

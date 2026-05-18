@@ -22,6 +22,9 @@ uv run python generate_toc.py
 # Preview locally (live dev server, opens browser)
 uv run jupyter-book start
 
+# Clean build artifacts (requires -y to skip confirmation)
+uv run jupyter-book clean -y
+
 # Build static HTML for deployment
 uv run jupyter-book build --html
 
