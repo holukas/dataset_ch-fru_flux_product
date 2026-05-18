@@ -5,14 +5,12 @@ project:
   - name: Lukas Hörtnagl
     email: lukas.hoertnagl@usys.ethz.ch
   github: https://github.com/holukas/dataset-ch-fru-flux-product
-  extensions:
-  - mermaid
+  index: docs/intro
   toc:
-  - file: docs/intro
-  - file: docs/data_description
+  - file: docs/placeholder1
+  - file: docs/placeholder2
   - title: Meteoscreening
     children:
-    - file: docs/meteoscreening
     - file: notebooks/10_METEO/12.0_DownloadMeteo_2021-2024_DB-PROCESSED_meteoscreening_diive
     - file: notebooks/10_METEO/12.2_DownloadMeteo_2005-2020_DB-PROCESSED_meteoscreening_mst
     - file: notebooks/10_METEO/13.0_MergeMeteo_2005-2024
@@ -83,19 +81,11 @@ project:
       - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/TS/TS_GF1_0.75_2_2021-2024
       - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/TS/TS_GF1_0.95_1
       - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/TS/TS_GF1_1_2_2021-2024
-  - title: Outlier Detection
-    children:
-    - file: docs/outlier_detection
-    - file: notebooks/02_outlier_detection
-  - title: Gap-Filling
-    children:
-    - file: docs/gapfilling
-    - file: notebooks/03_gapfilling
-  - title: Final Dataset
-    children:
-    - file: docs/final_dataset
-    - file: notebooks/04_final_dataset
+  - file: notebooks/02_outlier_detection
+  - file: notebooks/03_gapfilling
+  - file: notebooks/04_final_dataset
 site:
   template: book-theme
   options:
     base_url: /dataset_ch-fru_flux_product
+    stylesheet: _static/custom.css

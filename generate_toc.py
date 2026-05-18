@@ -26,22 +26,27 @@ def rel(path: Path) -> str:
     return path.relative_to(ROOT).with_suffix("").as_posix()
 
 
-# --- Build TOC entries ---
-toc = [
-    {"file": "docs/intro"},
-    {"file": "docs/data_description"},
+# --- Root document (landing page) ---
+# Use docs/intro.md if it exists, otherwise create a minimal stub.
+intro = ROOT / "docs" / "intro.md"
+if not intro.exists():
+    intro.write_text("# CH-FRU Flux Dataset Preparation\n\nWelcome.\n", encoding="utf-8")
+    print(f"Created stub: {intro}")
+
+# --- All other .md files in docs/ become top-level TOC entries ---
+other_docs = [
+    {"file": rel(p)}
+    for p in sorted((ROOT / "docs").glob("*.md"))
+    if p != intro
 ]
 
-# Meteoscreening chapter
-meteo_children = [{"file": "docs/meteoscreening"}]
-
+# --- Meteoscreening chapter ---
+meteo_children = []
 meteo_root = NB_ROOT / "10_METEO"
 
-# Top-level METEO notebooks (download, merge, gapfilling)
 for nb in iter_notebooks(meteo_root):
     meteo_children.append({"file": rel(nb)})
 
-# Per-variable screening notebooks grouped by variable folder
 screening_root = meteo_root / "11_meteoscreening_diive_2021-2025"
 if screening_root.exists():
     for var_dir in sorted(screening_root.iterdir()):
@@ -53,31 +58,12 @@ if screening_root.exists():
                     "children": [{"file": rel(nb)} for nb in nbs],
                 })
 
-toc.append({"title": "Meteoscreening", "children": meteo_children})
-
-# Remaining chapters (placeholders until notebooks are ready)
-toc += [
-    {
-        "title": "Outlier Detection",
-        "children": [
-            {"file": "docs/outlier_detection"},
-            {"file": "notebooks/02_outlier_detection"},
-        ],
-    },
-    {
-        "title": "Gap-Filling",
-        "children": [
-            {"file": "docs/gapfilling"},
-            {"file": "notebooks/03_gapfilling"},
-        ],
-    },
-    {
-        "title": "Final Dataset",
-        "children": [
-            {"file": "docs/final_dataset"},
-            {"file": "notebooks/04_final_dataset"},
-        ],
-    },
+# --- Full TOC ---
+toc = other_docs + [
+    {"title": "Meteoscreening", "children": meteo_children},
+    {"file": "notebooks/02_outlier_detection"},
+    {"file": "notebooks/03_gapfilling"},
+    {"file": "notebooks/04_final_dataset"},
 ]
 
 # --- Assemble full myst.yml ---
@@ -85,20 +71,16 @@ myst = {
     "version": 1,
     "project": {
         "title": "CH-FRU Flux Dataset Preparation",
-        "authors": [
-            {
-                "name": "Lukas Hörtnagl",
-                "email": "lukas.hoertnagl@usys.ethz.ch",
-            }
-        ],
+        "authors": [{"name": "Lukas Hörtnagl", "email": "lukas.hoertnagl@usys.ethz.ch"}],
         "github": "https://github.com/holukas/dataset-ch-fru-flux-product",
-        "extensions": ["mermaid"],
+        "index": rel(intro),
         "toc": toc,
     },
     "site": {
         "template": "book-theme",
         "options": {
             "base_url": "/dataset_ch-fru_flux_product",
+            "stylesheet": "_static/custom.css",
         },
     },
 }
@@ -106,4 +88,5 @@ myst = {
 out = ROOT / "myst.yml"
 out.write_text(yaml.dump(myst, allow_unicode=True, sort_keys=False, default_flow_style=False), encoding="utf-8")
 print(f"Written {out}")
-print(f"TOC entries (top-level): {len(toc)}")
+print(f"Root: {rel(intro)}")
+print(f"TOC entries: {len(toc)}")
