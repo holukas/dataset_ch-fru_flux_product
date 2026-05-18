@@ -97,3 +97,4 @@ project:
     - file: notebooks/04_final_dataset
 site:
   template: book-theme
+  base_url: /dataset_ch-fru_flux_product
