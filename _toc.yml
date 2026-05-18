@@ -1,0 +1,86 @@
+format: jb-book
+root: docs/intro
+chapters:
+  - file: docs/data_description
+  - file: docs/meteoscreening
+    sections:
+      - file: notebooks/10_METEO/12.0_DownloadMeteo_2021-2024_DB-PROCESSED_meteoscreening_diive
+      - file: notebooks/10_METEO/12.2_DownloadMeteo_2005-2020_DB-PROCESSED_meteoscreening_mst
+      - file: notebooks/10_METEO/13.0_MergeMeteo_2005-2024
+      - file: notebooks/10_METEO/16.0_GapFillingMeteo7_2005-2024
+      - file: notebooks/10_METEO/A1_DownloadMeteo_TA_SWIN_RH_2023-2025
+      - file: notebooks/10_METEO/A3_GapFillingMeteo_TA_SWIN_CalcVPD_2023-2025
+      - file: notebooks/10_METEO/xCalculate_VPD_from_TA_and_RH
+      - caption: 'G'
+        sections:
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/G/G_GF1_0.06_1_2021-2024
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/G/G_GF1_0.06_2_2021-2024
+      - caption: 'LW'
+        sections:
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/LW/LW_IN_T1_1_1_2021-2024
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/LW/LW_OUT_T1_1_1_2021-2024
+      - caption: 'PPFD'
+        sections:
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/PPFD/PPFD_IN_T1_2_1_2021-2024
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/PPFD/PPFD_OUT_T1_2_1_2021-2024
+      - caption: 'PREC'
+        sections:
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/PREC/PREC_TOT_GF1_1_1_2021-2024
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/PREC/PREC_TOT_T1_0.5_1_2021
+      - caption: 'RH'
+        sections:
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/RH/RH_T1_2_1_2021-2024
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/RH/RH_T1_2_1_2025
+      - caption: 'SW'
+        sections:
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/SW/SW_IN_T1_1_1_2021-2024
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/SW/SW_IN_T1_1_1_2025
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/SW/SW_OUT_T1_1_1_2021-2024
+      - caption: 'SWC'
+        sections:
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/SWC/SWC_GF1_0.05_1_2021-2024
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/SWC/SWC_GF1_0.05_2_2021-2024
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/SWC/SWC_GF1_0.15_1_2021-2024
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/SWC/SWC_GF1_0.1_2_2021-2024
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/SWC/SWC_GF1_0.25_1_2021-2024
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/SWC/SWC_GF1_0.2_2_2021-2024
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/SWC/SWC_GF1_0.3_2_2021-2024
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/SWC/SWC_GF1_0.4_1_2021-2024
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/SWC/SWC_GF1_0.4_2_2021-2024
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/SWC/SWC_GF1_0.5_2_2021-2024
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/SWC/SWC_GF1_0.6_2_2021-2024
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/SWC/SWC_GF1_0.75_2_2021-2024
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/SWC/SWC_GF1_0.95_1_2021-2024
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/SWC/SWC_GF1_1_2_2021-2024
+      - caption: 'TA'
+        sections:
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/TA/TA_T1_2_1_2021-2024
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/TA/TA_T1_2_1_2025
+      - caption: 'TS'
+        sections:
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/TS/TS_GF1_0.01_1_2021-2024
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/TS/TS_GF1_0.04_1_2021-2024
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/TS/TS_GF1_0.05_2_2021-2024
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/TS/TS_GF1_0.07_1_2021-2024
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/TS/TS_GF1_0.15_1_2021-2024
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/TS/TS_GF1_0.1_1_2021-2024
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/TS/TS_GF1_0.1_2_2021-2024
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/TS/TS_GF1_0.25_1_2021-2024
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/TS/TS_GF1_0.2_2_2021-2024
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/TS/TS_GF1_0.3_2_2021-2024
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/TS/TS_GF1_0.4_1_2021-2024
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/TS/TS_GF1_0.4_2_2021-2024
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/TS/TS_GF1_0.5_2_2021-2024
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/TS/TS_GF1_0.6_2
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/TS/TS_GF1_0.75_2_2021-2024
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/TS/TS_GF1_0.95_1
+          - file: notebooks/10_METEO/11_meteoscreening_diive_2021-2025/TS/TS_GF1_1_2_2021-2024
+  - file: docs/outlier_detection
+    sections:
+      - file: notebooks/02_outlier_detection
+  - file: docs/gapfilling
+    sections:
+      - file: notebooks/03_gapfilling
+  - file: docs/final_dataset
+    sections:
+      - file: notebooks/04_final_dataset

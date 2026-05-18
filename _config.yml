@@ -1,0 +1,20 @@
+title: CH-FRU Flux Dataset Preparation
+author: Lukas Hörtnagl
+description: Preparation of an eddy covariance grassland flux dataset (CH-FRU)
+
+execute:
+  execute_notebooks: "off"
+
+parse:
+  myst_enable_extensions:
+    - colon_fence
+    - dollarmath
+
+sphinx:
+  extra_extensions:
+    - sphinxcontrib.mermaid
+
+html:
+  use_issues_button: true
+  use_repository_button: true
+  repository_url: https://github.com/holukas/dataset-ch-fru-flux-product
