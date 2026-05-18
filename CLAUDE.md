@@ -25,8 +25,9 @@ uv run jupyter-book start
 # Clean build artifacts (requires -y to skip confirmation)
 uv run jupyter-book clean -y
 
-# Build static HTML for deployment
-uv run jupyter-book build --html
+# Build static HTML for deployment (BASE_URL needed for GitHub Pages subpath)
+# On Windows (Git Bash / uv run):
+MSYS_NO_PATHCONV=1 BASE_URL="/dataset_ch-fru_flux_product" uv run jupyter-book build --html
 
 # Deploy to GitHub Pages (after build --html)
 uv run ghp-import -n -p -f _build/html
