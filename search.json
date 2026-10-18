@@ -1,0 +1,498 @@
+[
+  {
+    "objectID": "Yearly_Notes.html",
+    "href": "Yearly_Notes.html",
+    "title": "Yearly Notes",
+    "section": "",
+    "text": "Yearly Notes\n\n\n\n\n\n\nNoteDraft\n\n\n\nSetup periods of the eddy-covariance system and notes per year. To be written.\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Reference",
+      "Yearly Notes"
+    ]
+  },
+  {
+    "objectID": "Variables.html",
+    "href": "Variables.html",
+    "title": "Variables",
+    "section": "",
+    "text": "Variables\n\n\n\n\n\n\nNoteDraft\n\n\n\nVariables in the published dataset: names, units, and quality flags. To be written.\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Reference",
+      "Variables"
+    ]
+  },
+  {
+    "objectID": "Software.html",
+    "href": "Software.html",
+    "title": "Used Software",
+    "section": "",
+    "text": "Used Software\n\n\n\n\n\n\nNoteDraft\n\n\n\nSoftware used to produce the dataset (e.g. EddyPro, diive, REddyProc). To be written.\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Reference",
+      "Used Software"
+    ]
+  },
+  {
+    "objectID": "References.html",
+    "href": "References.html",
+    "title": "References",
+    "section": "",
+    "text": "References\n\n\n\n\n\n\nNoteDraft\n\n\n\nReferences cited across the site. To be written.\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Reference",
+      "References"
+    ]
+  },
+  {
+    "objectID": "QCF.html",
+    "href": "QCF.html",
+    "title": "QCF: overall quality control flag",
+    "section": "",
+    "text": "QCF: overall quality control flag\n\n\n\n\n\n\nNoteDraft\n\n\n\nThe overall quality-control flag (QCF) after the processing chain. To be written.\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Flux Processing Chain",
+      "QCF: overall quality control flag"
+    ]
+  },
+  {
+    "objectID": "notebooks/index.html",
+    "href": "notebooks/index.html",
+    "title": "Workflow notebooks",
+    "section": "",
+    "text": "0 working research notebooks, grouped by the folder they live in. The number is the notebook’s own prefix and orders the notebooks within a folder, so 01 in 10_METEO/30_PRODUCTS is the incoming shortwave product. A folder whose notebooks have no dependency order does not number them, so the column is empty there. Outputs are shown exactly as committed in the notebook; the notebooks are not re-executed at build time.\n\n\n\n Back to top",
+    "crumbs": [
+      "Notebooks"
+    ]
+  },
+  {
+    "objectID": "Meteo_Data_VPD.html",
+    "href": "Meteo_Data_VPD.html",
+    "title": "Vapour pressure deficit (VPD)",
+    "section": "",
+    "text": "Vapour pressure deficit (VPD)\n\n\n\n\n\n\nNoteDraft\n\n\n\nColumns, units, coverage, provenance flags and known limitations of the VPD product. To be written.\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Meteo",
+      "Meteorological Data",
+      "Vapour pressure deficit (`VPD`)"
+    ]
+  },
+  {
+    "objectID": "Meteo_Data_TA.html",
+    "href": "Meteo_Data_TA.html",
+    "title": "Air temperature (TA)",
+    "section": "",
+    "text": "Air temperature (TA)\n\n\n\n\n\n\nNoteDraft\n\n\n\nColumns, units, coverage, provenance flags and known limitations of the TA product. To be written.\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Meteo",
+      "Meteorological Data",
+      "Air temperature (`TA`)"
+    ]
+  },
+  {
+    "objectID": "Meteo_Data_SW_IN.html",
+    "href": "Meteo_Data_SW_IN.html",
+    "title": "Incoming shortwave radiation (SW_IN)",
+    "section": "",
+    "text": "Incoming shortwave radiation (SW_IN)\n\n\n\n\n\n\nNoteDraft\n\n\n\nColumns, units, coverage, provenance flags and known limitations of the SW_IN product. To be written.\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Meteo",
+      "Meteorological Data",
+      "Incoming shortwave radiation (`SW_IN`)"
+    ]
+  },
+  {
+    "objectID": "Meteo_Data_RH.html",
+    "href": "Meteo_Data_RH.html",
+    "title": "Relative humidity (RH)",
+    "section": "",
+    "text": "Relative humidity (RH)\n\n\n\n\n\n\nNoteDraft\n\n\n\nColumns, units, coverage, provenance flags and known limitations of the RH product. To be written.\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Meteo",
+      "Meteorological Data",
+      "Relative humidity (`RH`)"
+    ]
+  },
+  {
+    "objectID": "Meteo_Data_PPFD_IN.html",
+    "href": "Meteo_Data_PPFD_IN.html",
+    "title": "Incoming photosynthetic photon flux density (PPFD_IN)",
+    "section": "",
+    "text": "Incoming photosynthetic photon flux density (PPFD_IN)\n\n\n\n\n\n\nNoteDraft\n\n\n\nColumns, units, coverage, provenance flags and known limitations of the PPFD_IN product. To be written.\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Meteo",
+      "Meteorological Data",
+      "Incoming photosynthetic photon flux density (`PPFD_IN`)"
+    ]
+  },
+  {
+    "objectID": "Meteo_Data_LW_IN.html",
+    "href": "Meteo_Data_LW_IN.html",
+    "title": "Incoming longwave radiation (LW_IN)",
+    "section": "",
+    "text": "Incoming longwave radiation (LW_IN)\n\n\n\n\n\n\nNoteDraft\n\n\n\nColumns, units, coverage, provenance flags and known limitations of the LW_IN product. To be written.\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Meteo",
+      "Meteorological Data",
+      "Incoming longwave radiation (`LW_IN`)"
+    ]
+  },
+  {
+    "objectID": "Meteo_Data.html",
+    "href": "Meteo_Data.html",
+    "title": "Meteorological Data",
+    "section": "",
+    "text": "NoteDraft\n\n\n\nConventions shared by all meteo products, the variables table, and how the products are built. To be written.\n\n\n\n\n\n\n\nTable 1: Meteorological parameters of the CH-FRU flux product. Every page is a draft.\n\n\n\n\n\nvariable\ndescription\npage\ndashboard\n\n\n\n\nSW_IN\nIncoming shortwave radiation\npage\nnot yet\n\n\nTA\nAir temperature\npage\nnot yet\n\n\nPPFD_IN\nIncoming photosynthetic photon flux density\npage\nnot yet\n\n\nRH\nRelative humidity\npage\nnot yet\n\n\nLW_IN\nIncoming longwave radiation\npage\nnot yet\n\n\nVPD\nVapour pressure deficit\npage\nnot yet\n\n\nPREC\nPrecipitation\npage\nnot yet\n\n\nSWC\nSoil water content\npage\nnot yet\n\n\nTS\nSoil temperature\npage\nnot yet\n\n\nG\nSoil heat flux\npage\nnot yet\n\n\nSW_OUT\nOutgoing shortwave radiation\npage\nnot yet\n\n\nLW_OUT\nOutgoing longwave radiation\npage\nnot yet",
+    "crumbs": [
+      "Meteo",
+      "Meteorological Data"
+    ]
+  },
+  {
+    "objectID": "Meteo_Data.html#parameters",
+    "href": "Meteo_Data.html#parameters",
+    "title": "Meteorological Data",
+    "section": "",
+    "text": "Table 1: Meteorological parameters of the CH-FRU flux product. Every page is a draft.\n\n\n\n\n\nvariable\ndescription\npage\ndashboard\n\n\n\n\nSW_IN\nIncoming shortwave radiation\npage\nnot yet\n\n\nTA\nAir temperature\npage\nnot yet\n\n\nPPFD_IN\nIncoming photosynthetic photon flux density\npage\nnot yet\n\n\nRH\nRelative humidity\npage\nnot yet\n\n\nLW_IN\nIncoming longwave radiation\npage\nnot yet\n\n\nVPD\nVapour pressure deficit\npage\nnot yet\n\n\nPREC\nPrecipitation\npage\nnot yet\n\n\nSWC\nSoil water content\npage\nnot yet\n\n\nTS\nSoil temperature\npage\nnot yet\n\n\nG\nSoil heat flux\npage\nnot yet\n\n\nSW_OUT\nOutgoing shortwave radiation\npage\nnot yet\n\n\nLW_OUT\nOutgoing longwave radiation\npage\nnot yet",
+    "crumbs": [
+      "Meteo",
+      "Meteorological Data"
+    ]
+  },
+  {
+    "objectID": "Links.html",
+    "href": "Links.html",
+    "title": "Links",
+    "section": "",
+    "text": "Links\n\n\n\n\n\n\nNoteDraft\n\n\n\nRelated links. To be written.\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Reference",
+      "Links"
+    ]
+  },
+  {
+    "objectID": "L4.1.html",
+    "href": "L4.1.html",
+    "title": "Level-4.1: Gap-filling",
+    "section": "",
+    "text": "Level-4.1: Gap-filling\n\n\n\n\n\n\nNoteDraft\n\n\n\nGap-filling of the fluxes (long-term random forest). To be written.\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Flux Processing Chain",
+      "Level-4.1: Gap-filling"
+    ]
+  },
+  {
+    "objectID": "L3.2.html",
+    "href": "L3.2.html",
+    "title": "Level-3.2: Outlier detection",
+    "section": "",
+    "text": "Level-3.2: Outlier detection\n\n\n\n\n\n\nNoteDraft\n\n\n\nOutlier detection and the resulting quality flags. To be written.\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Flux Processing Chain",
+      "Level-3.2: Outlier detection"
+    ]
+  },
+  {
+    "objectID": "L2.html",
+    "href": "L2.html",
+    "title": "Level-2: Quality flag expansion",
+    "section": "",
+    "text": "Level-2: Quality flag expansion\n\n\n\n\n\n\nNoteDraft\n\n\n\nExpansion of the raw quality flags into the processing-chain flag scheme. To be written.\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Flux Processing Chain",
+      "Level-2: Quality flag expansion"
+    ]
+  },
+  {
+    "objectID": "L0.html",
+    "href": "L0.html",
+    "title": "Level-0: Preliminary flux calculations",
+    "section": "",
+    "text": "Level-0: Preliminary flux calculations\n\n\n\n\n\n\nNoteDraft\n\n\n\nPreliminary flux calculations used to fine-tune the final processing settings. To be written.\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Eddy covariance",
+      "Level-0: Preliminary flux calculations"
+    ]
+  },
+  {
+    "objectID": "Instrumentation.html",
+    "href": "Instrumentation.html",
+    "title": "Instrumentation",
+    "section": "",
+    "text": "Instrumentation\n\n\n\n\n\n\nNoteDraft\n\n\n\nModel, serial number and period of every sensor at the tower and in the soil profile. To be written.\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Reference",
+      "Instrumentation"
+    ]
+  },
+  {
+    "objectID": "FPC.html",
+    "href": "FPC.html",
+    "title": "Flux Processing Chain",
+    "section": "",
+    "text": "NoteInfo\n\n\n\nFlux processing follows the Swiss Fluxnet Flux Processing Chain\n\n\n\n\n\n\n\n\n\nflowchart\n    ecbin[EC binary raw data]\n    eccsv[EC ASCII raw data]\n    met[meteo data]\n    L0F[L0 fluxes]\n    L1F[L1 fluxes]\n    L42F[L4.2 partitioned fluxes]\n    bico[bico]\n    EP[fluxrun/EddyPro]\n\n    %% ---------------- diive\n    subgraph diive_scripts\n        diive[diive]\n        L2QCF[L2 quality flags]\n        L32QCF[L3.2 quality flags]\n        L33QCF[L3.3 quality flags]\n        QCF[overall quality flag QCF]\n        L31F[L3.1 fluxes]\n        L31QCF[L3.1 fluxes filtered]        \n        L31Ffiltered[L3.1 fluxes filtered]\n        L41F[L4.1 gap-filled fluxes]\n    end\n    \n\n    ecbin --&gt; bico --&gt; eccsv --&gt; EP\n    EP --&gt; L0F -- informs --&gt; L1F\n    met -- informs --&gt; L1F\n    \n    L1F --&gt; diive    \n    diive --&gt; L2QCF\n    diive --&gt; L31F\n    diive --&gt; L33QCF\n    L2QCF --&gt; L31Ffiltered\n    L2QCF --&gt; QCF\n    L32QCF --&gt; QCF\n    L33QCF --&gt; QCF\n    QCF --&gt; L31QCF\n    L31F --&gt; L31QCF        \n    L31QCF -- gap-filling --&gt; L41F\n    L31F --&gt; L31Ffiltered\n    L31Ffiltered --&gt; L32QCF\n    L41F -- partitioning (NEE) --&gt; L42F\n\n    classDef orange fill:#FFE0B2,stroke:#E65100,stroke_width:4px,color:#E65100\n    class L2QCF,L32QCF,L33QCF,QCF orange\n\n    classDef green fill:#DCEDC8,stroke:#33691E,stroke_width:4px,color:#33691E\n    class L0F,L1F,L31F,L31Ffiltered,L31QCF,L41F,L42F green\n\n    classDef blue fill:#E1F5FE,stroke:#01579B,stroke_width:4px,color:#01579B\n    class bico,EP,diive blue\n\n    classDef white fill:#FFFFFF,stroke:#000000,stroke_width:4px,color:#000000\n    class diive_scripts white\n\n\n\n\n\n\n\n\n\n\n\nRaw data EC are the eddy covariance raw data files.\nLevel-0 are preliminary calculations, used to fine-tune final processing settings.\nLevel-1 are final flux calculations that are used in all subsequent steps.\nLevel-2 creates additional quality flags based on Level-1 output\nLevel-3.1 adds the storage term to the respective flux\nLevel-3.2 detects outliers and creates additional quality flags\nLevel-3.3 creates additional quality flags based on three different constant USTAR thresholds, previously detected by FLUXNET (Pastorello et al., 2020)\nLevel-4.1 performs gap-filling (long-term random forest)\nLevel-4.2 partitions NEE fluxes (gap-filled with random forest) into GPP and RECO",
+    "crumbs": [
+      "Flux Processing Chain"
+    ]
+  },
+  {
+    "objectID": "FPC.html#flowchart",
+    "href": "FPC.html#flowchart",
+    "title": "Flux Processing Chain",
+    "section": "",
+    "text": "flowchart\n    ecbin[EC binary raw data]\n    eccsv[EC ASCII raw data]\n    met[meteo data]\n    L0F[L0 fluxes]\n    L1F[L1 fluxes]\n    L42F[L4.2 partitioned fluxes]\n    bico[bico]\n    EP[fluxrun/EddyPro]\n\n    %% ---------------- diive\n    subgraph diive_scripts\n        diive[diive]\n        L2QCF[L2 quality flags]\n        L32QCF[L3.2 quality flags]\n        L33QCF[L3.3 quality flags]\n        QCF[overall quality flag QCF]\n        L31F[L3.1 fluxes]\n        L31QCF[L3.1 fluxes filtered]        \n        L31Ffiltered[L3.1 fluxes filtered]\n        L41F[L4.1 gap-filled fluxes]\n    end\n    \n\n    ecbin --&gt; bico --&gt; eccsv --&gt; EP\n    EP --&gt; L0F -- informs --&gt; L1F\n    met -- informs --&gt; L1F\n    \n    L1F --&gt; diive    \n    diive --&gt; L2QCF\n    diive --&gt; L31F\n    diive --&gt; L33QCF\n    L2QCF --&gt; L31Ffiltered\n    L2QCF --&gt; QCF\n    L32QCF --&gt; QCF\n    L33QCF --&gt; QCF\n    QCF --&gt; L31QCF\n    L31F --&gt; L31QCF        \n    L31QCF -- gap-filling --&gt; L41F\n    L31F --&gt; L31Ffiltered\n    L31Ffiltered --&gt; L32QCF\n    L41F -- partitioning (NEE) --&gt; L42F\n\n    classDef orange fill:#FFE0B2,stroke:#E65100,stroke_width:4px,color:#E65100\n    class L2QCF,L32QCF,L33QCF,QCF orange\n\n    classDef green fill:#DCEDC8,stroke:#33691E,stroke_width:4px,color:#33691E\n    class L0F,L1F,L31F,L31Ffiltered,L31QCF,L41F,L42F green\n\n    classDef blue fill:#E1F5FE,stroke:#01579B,stroke_width:4px,color:#01579B\n    class bico,EP,diive blue\n\n    classDef white fill:#FFFFFF,stroke:#000000,stroke_width:4px,color:#000000\n    class diive_scripts white",
+    "crumbs": [
+      "Flux Processing Chain"
+    ]
+  },
+  {
+    "objectID": "FPC.html#processing-steps",
+    "href": "FPC.html#processing-steps",
+    "title": "Flux Processing Chain",
+    "section": "",
+    "text": "Raw data EC are the eddy covariance raw data files.\nLevel-0 are preliminary calculations, used to fine-tune final processing settings.\nLevel-1 are final flux calculations that are used in all subsequent steps.\nLevel-2 creates additional quality flags based on Level-1 output\nLevel-3.1 adds the storage term to the respective flux\nLevel-3.2 detects outliers and creates additional quality flags\nLevel-3.3 creates additional quality flags based on three different constant USTAR thresholds, previously detected by FLUXNET (Pastorello et al., 2020)\nLevel-4.1 performs gap-filling (long-term random forest)\nLevel-4.2 partitions NEE fluxes (gap-filled with random forest) into GPP and RECO",
+    "crumbs": [
+      "Flux Processing Chain"
+    ]
+  },
+  {
+    "objectID": "Data_Dashboards.html",
+    "href": "Data_Dashboards.html",
+    "title": "Data Dashboards",
+    "section": "",
+    "text": "Data Dashboards\n\n\n\n\n\n\nNoteDraft\n\n\n\nInteractive dashboards, one per exported series, summarising each product year by year. The dashboard builders do not exist in this repository yet. To be written.\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Data Dashboards"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "CH-FRU Flux Product (PI dataset)",
+    "section": "",
+    "text": "ImportantDataset in preparation\n\n\n\nThis dataset is currently in preparation. Both the data and this documentation are work in progress and are subject to change. Please contact the author before using the data.\n\n\nproduced by Lukas Hörtnagl\nDocumentation and notebooks for the creation of the PI dataset of the grassland station CH-FRU (Früebüel). The site is part of Swiss FluxNet, operated by the Grassland Sciences Group, ETH Zurich.\nThe dataset comprises ecosystem fluxes measured by the eddy covariance method (CO2, H2O, H), meteorological data and management information.\nFor an overview of the dataset, see Overview.\nFor an overview of recent documentation updates see here.\nFor a list of planned updates and additions, see Issues on the GitHub repository.\n\n\n\n\n\n\n\n\nNoteDraft\n\n\n\nRelease names and periods. To be written.\n\n\n\n\n\n\n\n\n\n\n\nNoteDraft\n\n\n\nAcknowledgments and funding. To be written.",
+    "crumbs": [
+      "CH-FRU Flux Product (PI dataset)"
+    ]
+  },
+  {
+    "objectID": "index.html#current-dataset-version",
+    "href": "index.html#current-dataset-version",
+    "title": "CH-FRU Flux Product (PI dataset)",
+    "section": "",
+    "text": "NoteDraft\n\n\n\nRelease names and periods. To be written.",
+    "crumbs": [
+      "CH-FRU Flux Product (PI dataset)"
+    ]
+  },
+  {
+    "objectID": "index.html#acknowledgments",
+    "href": "index.html#acknowledgments",
+    "title": "CH-FRU Flux Product (PI dataset)",
+    "section": "",
+    "text": "NoteDraft\n\n\n\nAcknowledgments and funding. To be written.",
+    "crumbs": [
+      "CH-FRU Flux Product (PI dataset)"
+    ]
+  },
+  {
+    "objectID": "Issues.html",
+    "href": "Issues.html",
+    "title": "Known Issues",
+    "section": "",
+    "text": "Known Issues\n\n\n\n\n\n\nNoteDraft\n\n\n\nLimitations of the processing chain that do not belong to a single variable. To be written.\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Reference",
+      "Known Issues"
+    ]
+  },
+  {
+    "objectID": "L1.html",
+    "href": "L1.html",
+    "title": "Level-1: Final flux calculations",
+    "section": "",
+    "text": "Level-1: Final flux calculations\n\n\n\n\n\n\nNoteDraft\n\n\n\nFinal flux calculations (EddyPro output). To be written.\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Eddy covariance",
+      "Level-1: Final flux calculations"
+    ]
+  },
+  {
+    "objectID": "L3.1.html",
+    "href": "L3.1.html",
+    "title": "Level-3.1: Storage correction",
+    "section": "",
+    "text": "Level-3.1: Storage correction\n\n\n\n\n\n\nNoteDraft\n\n\n\nStorage-term correction. To be written.\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Flux Processing Chain",
+      "Level-3.1: Storage correction"
+    ]
+  },
+  {
+    "objectID": "L3.3.html",
+    "href": "L3.3.html",
+    "title": "Level-3.3: USTAR filtering",
+    "section": "",
+    "text": "Level-3.3: USTAR filtering\n\n\n\n\n\n\nNoteDraft\n\n\n\nQuality flags from constant USTAR thresholds. To be written.\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Flux Processing Chain",
+      "Level-3.3: USTAR filtering"
+    ]
+  },
+  {
+    "objectID": "L4.2.html",
+    "href": "L4.2.html",
+    "title": "Level-4.2: Flux partitioning",
+    "section": "",
+    "text": "Level-4.2: Flux partitioning\n\n\n\n\n\n\nNoteDraft\n\n\n\nPartitioning of gap-filled NEE into GPP and RECO. To be written.\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Flux Processing Chain",
+      "Level-4.2: Flux partitioning"
+    ]
+  },
+  {
+    "objectID": "Management_Data.html",
+    "href": "Management_Data.html",
+    "title": "Management Data",
+    "section": "",
+    "text": "Management Data\n\n\n\n\n\n\nNoteDraft\n\n\n\nSite management data for the grassland CH-FRU (mowing, grazing, fertilisation). To be written.\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Management Data"
+    ]
+  },
+  {
+    "objectID": "Meteo_Data_G.html",
+    "href": "Meteo_Data_G.html",
+    "title": "Soil heat flux (G)",
+    "section": "",
+    "text": "Soil heat flux (G)\n\n\n\n\n\n\nNoteDraft\n\n\n\nColumns, units, coverage, provenance flags and known limitations of the G product. To be written.\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Meteo",
+      "Meteorological Data",
+      "Soil heat flux (`G`)"
+    ]
+  },
+  {
+    "objectID": "Meteo_Data_LW_OUT.html",
+    "href": "Meteo_Data_LW_OUT.html",
+    "title": "Outgoing longwave radiation (LW_OUT)",
+    "section": "",
+    "text": "Outgoing longwave radiation (LW_OUT)\n\n\n\n\n\n\nNoteDraft\n\n\n\nColumns, units, coverage, provenance flags and known limitations of the LW_OUT product. To be written.\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Meteo",
+      "Meteorological Data",
+      "Outgoing longwave radiation (`LW_OUT`)"
+    ]
+  },
+  {
+    "objectID": "Meteo_Data_PREC.html",
+    "href": "Meteo_Data_PREC.html",
+    "title": "Precipitation (PREC)",
+    "section": "",
+    "text": "Precipitation (PREC)\n\n\n\n\n\n\nNoteDraft\n\n\n\nColumns, units, coverage, provenance flags and known limitations of the PREC product. To be written.\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Meteo",
+      "Meteorological Data",
+      "Precipitation (`PREC`)"
+    ]
+  },
+  {
+    "objectID": "Meteo_Data_SWC.html",
+    "href": "Meteo_Data_SWC.html",
+    "title": "Soil water content (SWC)",
+    "section": "",
+    "text": "Soil water content (SWC)\n\n\n\n\n\n\nNoteDraft\n\n\n\nColumns, units, coverage, provenance flags and known limitations of the SWC product. To be written.\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Meteo",
+      "Meteorological Data",
+      "Soil water content (`SWC`)"
+    ]
+  },
+  {
+    "objectID": "Meteo_Data_SW_OUT.html",
+    "href": "Meteo_Data_SW_OUT.html",
+    "title": "Outgoing shortwave radiation (SW_OUT)",
+    "section": "",
+    "text": "Outgoing shortwave radiation (SW_OUT)\n\n\n\n\n\n\nNoteDraft\n\n\n\nColumns, units, coverage, provenance flags and known limitations of the SW_OUT product. To be written.\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Meteo",
+      "Meteorological Data",
+      "Outgoing shortwave radiation (`SW_OUT`)"
+    ]
+  },
+  {
+    "objectID": "Meteo_Data_TS.html",
+    "href": "Meteo_Data_TS.html",
+    "title": "Soil temperature (TS)",
+    "section": "",
+    "text": "Soil temperature (TS)\n\n\n\n\n\n\nNoteDraft\n\n\n\nColumns, units, coverage, provenance flags and known limitations of the TS product. To be written.\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Meteo",
+      "Meteorological Data",
+      "Soil temperature (`TS`)"
+    ]
+  },
+  {
+    "objectID": "Meteo_Product_Chain.html",
+    "href": "Meteo_Product_Chain.html",
+    "title": "Meteo Product Chain",
+    "section": "",
+    "text": "Meteo Product Chain\n\n\n\n\n\n\nNoteDraft\n\n\n\nHow the meteorological products are built, from the reference data through screening to the merged product, as a flowchart. To be written.\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Meteo",
+      "Meteo Product Chain"
+    ]
+  },
+  {
+    "objectID": "Overview.html",
+    "href": "Overview.html",
+    "title": "Overview",
+    "section": "",
+    "text": "Overview\n\n\n\n\n\n\nNoteDraft\n\n\n\nScope, periods and coverage of the CH-FRU flux product. To be written.\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "Raw_Data.html",
+    "href": "Raw_Data.html",
+    "title": "Raw Data: Eddy Covariance",
+    "section": "",
+    "text": "Raw Data: Eddy Covariance\n\n\n\n\n\n\nNoteDraft\n\n\n\nThe raw eddy-covariance measurements and their acquisition. To be written.\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Eddy covariance",
+      "Raw Data: Eddy Covariance"
+    ]
+  },
+  {
+    "objectID": "Site_Info.html",
+    "href": "Site_Info.html",
+    "title": "Site Information",
+    "section": "",
+    "text": "Site Information\n\n\n\n\n\n\nNoteDraft\n\n\n\nPosition, elevation, climate, vegetation, soil, management and footprint of CH-FRU, each value naming its source. To be written.\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Site Information"
+    ]
+  },
+  {
+    "objectID": "Supplementary.html",
+    "href": "Supplementary.html",
+    "title": "Supplementary Information",
+    "section": "",
+    "text": "Supplementary Information\n\n\n\n\n\n\nNoteDraft\n\n\n\nSupplementary information. To be written.\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Reference",
+      "Supplementary Information"
+    ]
+  },
+  {
+    "objectID": "Versions.html",
+    "href": "Versions.html",
+    "title": "Dataset Versions",
+    "section": "",
+    "text": "Dataset Versions\n\n\n\n\n\n\nNoteDraft\n\n\n\nDataset versions and changelog. To be written.\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Reference",
+      "Dataset Versions"
+    ]
+  }
+]
