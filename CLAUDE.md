@@ -22,11 +22,14 @@ the docs content and the site mark. CH-LAE's
 - `docs/` — the published Quarto website, with a single config file
   `docs/_quarto.yml`. This is the reader-facing artifact and is kept clean. Only
   pages listed in `_quarto.yml`'s `website.sidebar.contents` are in the nav.
-  Build output lands in `docs/_build/html/` (gitignored). The site mark
-  (`logo.*` for the sidebar, `favicon.*` for the tab icon) is the same artwork,
-  so the two must be regenerated together: `docs/logo.svg` is the source and
-  `uv run python docs/_raw/render_mark.py` writes every raster and the `.ico`,
-  whose 16 px frame is hand-drawn in that script and must be edited with the SVG.
+  Build output lands in `docs/_build/html/` (gitignored). The site mark has one
+  source, `docs/logo.svg`. Its drawing is inlined into the sidebar brand by
+  `docs/_logo-sidebar.html`; that copy is written by hand, so it must be updated
+  whenever `logo.svg` changes. `favicon.*` is the tab icon, generated together
+  with `logo.png` by `uv run python docs/_raw/render_mark.py`, whose 16 px `.ico`
+  frame is hand-drawn in that script and must be edited with the SVG. `logo.png`
+  is no longer referenced by the site; the script still generates it as a
+  raster of the mark for reuse outside the site.
 - `workflow/` — the real working notebooks and scripts, organized by numbered
   stage. This is research scratch space: `build_notebooks.py` stages the
   notebooks onto the site as an appendix behind the generated notebook index, but
