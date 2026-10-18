@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <title>CH-FRU Flux Product</title>
+  <!-- Editable source of the site mark: a tuft of meadow grass on the rolling
+       pre-alpine pasture of Früebüel, a low ridge behind it, and the sun. On a
+       dark tile rather than a transparent background so it reads on both the
+       light and the dark theme. favicon.svg is a copy of this file. The 256-512 px
+       rasters are generated from it by docs/_raw/render_mark.py, which understands
+       only the elements used here (rect, circle, polygon, the tile clip); the
+       16 px favicon frame is drawn by hand in that script. -->
+  <defs>
+    <clipPath id="tile"><rect width="256" height="256" rx="46"/></clipPath>
+  </defs>
+  <rect width="256" height="256" rx="46" fill="#163a5c"/>
+  <g clip-path="url(#tile)">
+    <circle cx="188" cy="70" r="26" fill="#ffd166"/>
+    <polygon points="0,156 40,128 70,140 112,110 156,138 196,122 256,150 256,256 0,256" fill="#2e6390"/>
+    <circle cx="30" cy="400" r="240" fill="#4f9e4a"/>
+    <circle cx="240" cy="420" r="236" fill="#7cc65c"/>
+    <g fill="#e6f8c8">
+      <polygon points="104,256 104,214 100,170 88,124 108,168 116,212 118,256"/>
+      <polygon points="122,256 124,196 126,140 134,80 140,140 138,198 138,256"/>
+      <polygon points="142,256 144,210 154,166 178,128 162,172 156,212 156,256"/>
+      <polygon points="84,256 86,226 80,198 62,170 88,194 96,226 96,256"/>
+      <polygon points="160,256 164,226 176,202 198,182 182,210 174,230 172,256"/>
+    </g>
+  </g>
+</svg>

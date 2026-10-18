@@ -1,0 +1,198 @@
+"""Generate the raster site mark from docs/logo.svg.
+
+    uv run python docs/_raw/render_mark.py              # write the files below
+    uv run python docs/_raw/render_mark.py --preview X  # also write a preview sheet to X
+
+Writes, beside logo.svg in docs/:
+  - logo.png      512 px, the sidebar logo
+  - favicon.png   512 px, for reuse (social cards, apple-touch); not referenced by Quarto
+  - favicon.svg   a copy of logo.svg
+  - favicon.ico   16/24/32/48/64/128/256 frames
+
+logo.svg is the source. No SVG renderer is installed in this environment, so this script
+draws the SVG itself with Pillow. It understands only what the mark uses: <rect> (with rx),
+<circle>, <polygon>, a fill inherited from <g>, and the tile clip, which is applied to
+everything. Anything else in the file raises rather than being skipped, so an edit that the
+renderer cannot draw fails instead of producing a raster that disagrees with the SVG.
+
+The 16 px .ico frame is NOT rendered from the SVG. At 16 px the five blades of the drawing
+merge into one pale blob, so that frame is drawn by hand below (FRAME_16): three one-pixel
+blades with a pixel of background between them, a 4 px sun, and the bands of ridge and pasture.
+Edit it together with the SVG when the drawing changes.
+"""
+from __future__ import annotations
+
+import argparse
+import shutil
+import xml.etree.ElementTree as ET
+from pathlib import Path
+
+from PIL import Image, ImageChops, ImageColor, ImageDraw
+
+DOCS = Path(__file__).resolve().parent.parent
+SVG = DOCS / "logo.svg"
+NS = "{http://www.w3.org/2000/svg}"
+SUPERSAMPLE = 8
+ICO_SIZES = [16, 24, 32, 48, 64, 128, 256]
+
+# Hand-drawn 16 px frame. One character per pixel; '.' is transparent (the rounded corners).
+PALETTE_16 = {
+    "T": "#163a5c",  # tile
+    "S": "#ffd166",  # sun
+    "R": "#2e6390",  # ridge
+    "H": "#4f9e4a",  # far pasture
+    "L": "#7cc65c",  # near pasture
+    "B": "#e6f8c8",  # grass blades
+}
+FRAME_16 = [
+    "..TTTTTTTTTTTT..",
+    ".TTTTTTTTTTTTTT.",
+    "TTTTTTTTTTTSSTTT",
+    "TTTTTTTTTTSSSSTT",
+    "TTTTTTTTTTSSSSTT",
+    "TTTTTTTTBTTSSTTT",
+    "TTTTTTTTBTTTTTTT",
+    "TTTTTTRRBTTTTTTT",
+    "TTRRTBRRBRRBRRTT",
+    "RRRRRBRRBRRBRRRR",
+    "HHHHHRBRBRBRRRRR",
+    "HHHHHHBHBHBRRRRR",
+    "HHHHHHBHBHBLLLLL",
+    "HHHHHHBHBHBLLLLL",
+    ".HHHHHBLBLBLLLL.",
+    "..HHHHBLBLBLLL..",
+]
+
+
+def _shapes(svg: Path):
+    """Yield (tag, attributes, fill) in paint order, and the tile rect."""
+    root = ET.parse(svg).getroot()
+    vb = [float(v) for v in root.get("viewBox").split()]
+    if vb[:2] != [0, 0] or vb[2] != vb[3]:
+        raise ValueError(f"expected a square viewBox from 0,0, got {vb}")
+    shapes, tile = [], None
+
+    def walk(el, fill):
+        nonlocal tile
+        for c in el:
+            tag = c.tag.replace(NS, "")
+            if tag == "title" or not isinstance(c.tag, str):
+                continue
+            if tag == "defs":
+                # Only the tile clip is supported, and it must match the tile rect.
+                rects = c.findall(f"{NS}clipPath/{NS}rect")
+                if len(rects) != 1 or len(list(c.iter())) != 3:
+                    raise ValueError("<defs> may hold only the one tile <clipPath><rect>")
+                continue
+            f = c.get("fill", fill)
+            if tag == "g":
+                walk(c, f)
+            elif tag in ("rect", "circle", "polygon"):
+                if f is None:
+                    raise ValueError(f"<{tag}> has no fill")
+                if tag == "rect":
+                    if tile is not None:
+                        raise ValueError("only one <rect> (the tile) is supported")
+                    tile = c.attrib
+                shapes.append((tag, c.attrib, f))
+            else:
+                raise ValueError(f"render_mark.py cannot draw <{tag}>; extend it or keep the "
+                                 f"SVG to rect/circle/polygon")
+
+    walk(root, None)
+    if tile is None:
+        raise ValueError("no tile <rect> found")
+    return vb[2], shapes, tile
+
+
+def render(size: int, svg: Path = SVG) -> Image.Image:
+    """Draw the SVG at `size` px, supersampled and clipped to the rounded tile."""
+    extent, shapes, tile = _shapes(svg)
+    big = size * SUPERSAMPLE
+    k = big / extent
+    layer = Image.new("RGBA", (big, big), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(layer)
+    for tag, a, fill in shapes:
+        if tag == "rect":
+            x, y = float(a.get("x", 0)) * k, float(a.get("y", 0)) * k
+            w, h = float(a["width"]) * k, float(a["height"]) * k
+            draw.rounded_rectangle([x, y, x + w - 1, y + h - 1],
+                                   radius=float(a.get("rx", 0)) * k, fill=fill)
+        elif tag == "circle":
+            cx, cy, r = float(a["cx"]) * k, float(a["cy"]) * k, float(a["r"]) * k
+            draw.ellipse([cx - r, cy - r, cx + r, cy + r], fill=fill)
+        else:
+            pts = [tuple(float(v) * k for v in p.split(",")) for p in a["points"].split()]
+            draw.polygon(pts, fill=fill)
+    # The tile clip: everything outside the rounded rect becomes transparent.
+    mask = Image.new("L", (big, big), 0)
+    ImageDraw.Draw(mask).rounded_rectangle([0, 0, big - 1, big - 1],
+                                           radius=float(tile.get("rx", 0)) * k, fill=255)
+    layer.putalpha(ImageChops.multiply(layer.getchannel("A"), mask))
+    return layer.resize((size, size), Image.LANCZOS)
+
+
+def frame_16() -> Image.Image:
+    if len(FRAME_16) != 16 or any(len(r) != 16 for r in FRAME_16):
+        raise ValueError("FRAME_16 must be 16 rows of 16 characters")
+    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    for y, row in enumerate(FRAME_16):
+        for x, ch in enumerate(row):
+            if ch != ".":
+                img.putpixel((x, y), ImageColor.getrgb(PALETTE_16[ch]) + (255,))
+    return img
+
+
+def preview(path: Path) -> None:
+    """A sheet of every size on a light and a dark strip, 16-48 px also shown magnified."""
+    frames = {16: frame_16(), **{s: render(s) for s in ICO_SIZES[1:]}}
+    big = render(256)
+    w, h = 1100, 760
+    sheet = Image.new("RGB", (w, h), "#ffffff")
+    ImageDraw.Draw(sheet).rectangle([0, h // 2, w, h], fill="#212529")
+    for row, y0 in enumerate((20, h // 2 + 20)):
+        sheet.paste(big, (20, y0), big)
+        x = 300
+        for s in ICO_SIZES[:-1]:
+            sheet.paste(frames[s], (x, y0), frames[s])
+            x += s + 16
+        x = 300
+        for s in (16, 24, 32, 48):  # magnified, nearest-neighbour, to judge the pixels
+            m = frames[s].resize((s * (192 // s),) * 2, Image.NEAREST)
+            sheet.paste(m, (x, y0 + 144), m)
+            x += m.width + 16
+    sheet.save(path)
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser(description=__doc__,
+                                 formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--preview", type=Path, help="also write a preview sheet here")
+    args = ap.parse_args()
+
+    png = render(512)
+    png.save(DOCS / "logo.png", optimize=True)
+    png.save(DOCS / "favicon.png", optimize=True)
+    shutil.copyfile(SVG, DOCS / "favicon.svg")
+
+    frames = [frame_16()] + [render(s) for s in ICO_SIZES[1:]]
+    # Pillow takes the frames from append_images when one matches a requested size, so the
+    # hand-drawn 16 px frame is stored as drawn rather than downscaled from the 256 px one.
+    frames[-1].save(DOCS / "favicon.ico", sizes=[(s, s) for s in ICO_SIZES],
+                    append_images=frames[:-1])
+    ico = Image.open(DOCS / "favicon.ico")
+    stored = sorted(ico.info["sizes"])
+    if stored != [(s, s) for s in ICO_SIZES]:
+        raise RuntimeError(f"favicon.ico holds {stored}, expected {ICO_SIZES}")
+    ico.size = (16, 16)
+    if ico.convert("RGBA").tobytes() != frames[0].tobytes():
+        raise RuntimeError("favicon.ico's 16 px frame is not the hand-drawn FRAME_16")
+    print(f"wrote logo.png, favicon.png (512 px), favicon.svg, favicon.ico {ICO_SIZES}")
+
+    if args.preview:
+        preview(args.preview)
+        print(f"preview: {args.preview}")
+
+
+if __name__ == "__main__":
+    main()
