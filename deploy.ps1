@@ -1,0 +1,127 @@
+#!/usr/bin/env pwsh
+#
+# Deploy the CH-FRU flux-product docs site to GitHub Pages.
+#
+# Builds the Quarto website, the notebook HTML, the meteo dashboards and the
+# calendar explorer, then
+# publishes the output tree (docs/_build/html) to the gh-pages branch with
+# ghp-import. ghp-import commits and (with -p) force-pushes gh-pages — it does
+# NOT touch your source branch or working tree.
+#
+# Usage (from anywhere):
+#   ./deploy.ps1 -Preview        # build the FULL site + serve locally (pre-deploy check)
+#   ./deploy.ps1                 # build + publish to gh-pages
+#   ./deploy.ps1 -NoPublish      # build only, no serve, no push
+#   ./deploy.ps1 -NoDashboards   # skip the dashboards and the explorer (see step 4)
+#   ./deploy.ps1 -Remote origin -Branch gh-pages
+#
+# Requires: uv (the env provides quarto-cli and ghp-import) and a configured
+# git remote. The dashboards additionally need the external data folder, which
+# lives outside this repo. Published site:
+# https://holukas.github.io/dataset_ch-fru_flux_product/
+
+[CmdletBinding()]
+param(
+    [switch]$Preview,
+    [switch]$NoPublish,
+    [switch]$NoDashboards,
+    [int]$Port = 8000,
+    [string]$Remote = 'origin',
+    [string]$Branch = 'gh-pages'
+)
+
+$ErrorActionPreference = 'Stop'
+# Always run from the repo root (this script's dir), regardless of caller cwd.
+Set-Location -Path $PSScriptRoot
+
+function Invoke-Step {
+    param([string]$Desc, [scriptblock]$Cmd)
+    Write-Host "==> $Desc" -ForegroundColor Cyan
+    & $Cmd
+    if ($LASTEXITCODE -ne 0) { throw "Step failed: $Desc (exit $LASTEXITCODE)" }
+}
+
+# 1. Stage the workflow notebooks into docs/notebooks/ (gitignored) so the
+#    Quarto render picks them up. Must run BEFORE the render.
+Invoke-Step 'Staging notebooks (workflow/ -> docs/notebooks/)' { uv run python build_notebooks.py }
+
+# 2. Render the whole Quarto website, INCLUDING the staged notebooks (they get
+#    the site theme, TOC, and anchored headers). Output -> docs/_build/html/.
+Invoke-Step 'Rendering Quarto website + notebooks (docs/)' { uv run quarto render docs }
+
+# 3. Clear the staged notebook copies so docs/ stays clean (the rendered HTML is
+#    already in docs/_build/html/notebooks/; only the inputs are removed).
+Invoke-Step 'Clearing notebook staging (docs/notebooks/)' { uv run python build_notebooks.py --clean }
+
+# 4. Build the meteo dashboards straight into the rendered output tree.
+#    AFTER the render, not before: Quarto rewrites docs/_build/html on every
+#    render, so anything placed there first is deleted. Writing into the output
+#    also keeps several megabytes of generated HTML out of the source tree, and
+#    keeps Quarto from seeing files it has no reason to touch — each dashboard is
+#    a complete standalone page with its own CSS and JS, not a site page.
+#
+#    This reads the external (untracked) data folder. Where that folder is not
+#    available the step fails rather than being skipped quietly: the docs link to
+#    these files, so a silent skip would publish dead links. Use -NoDashboards to
+#    build the site without them deliberately.
+#
+#    The calendar explorer is built into the same folder and under the same
+#    switch, for the same reasons. It is filed under the meteo dashboards only
+#    because the products it reads are the meteo products; it is a calendar over
+#    whatever the dataset carries, not a meteo page. When the flux products land
+#    it should move out of dashboards/ into a place of its own beside them, and
+#    the link in docs/Meteo_Data.md should move with it.
+#
+#    The two builders do not exist in this repo yet (the CH-LAE versions read
+#    that site's product registry). Until they are added the step is skipped
+#    with a notice; once they exist it behaves exactly as in CH-LAE.
+$dashboardBuilders = @(
+    'workflow/90_DATASET_OVERVIEW/build_meteo_dashboard.py',
+    'workflow/90_DATASET_OVERVIEW/build_calendar_explorer.py'
+)
+if (-not $NoDashboards -and -not ($dashboardBuilders | Where-Object { Test-Path $_ })) {
+    Write-Host '==> No dashboard builders in workflow/90_DATASET_OVERVIEW/ yet; skipping dashboards' -ForegroundColor Yellow
+    $NoDashboards = $true
+}
+if (-not $NoDashboards) {
+    Invoke-Step 'Building meteo dashboards (-> docs/_build/html/dashboards/)' {
+        uv run python workflow/90_DATASET_OVERVIEW/build_meteo_dashboard.py `
+            --all --outdir docs/_build/html/dashboards
+    }
+    Invoke-Step 'Building calendar explorer (-> docs/_build/html/dashboards/)' {
+        uv run python workflow/90_DATASET_OVERVIEW/build_calendar_explorer.py `
+            --outdir docs/_build/html/dashboards
+    }
+} else {
+    Write-Host '==> Skipping meteo dashboards and calendar explorer (-NoDashboards); links to them will 404' -ForegroundColor Yellow
+}
+
+if ($Preview) {
+    # Serve the full built site (book + notebooks) exactly as it will deploy.
+    # A real HTTP server (not file://) is needed so search and /notebooks/ work.
+    $url = "http://localhost:$Port/"
+    Write-Host "Serving docs/_build/html at $url  (Ctrl+C to stop)" -ForegroundColor Green
+    Start-Process $url  # open in the default browser
+    uv run python -m http.server $Port --directory docs/_build/html
+    return
+}
+
+if ($NoPublish) {
+    Write-Host "Build complete. Output: docs/_build/html (publish skipped)." -ForegroundColor Green
+    Write-Host "Preview it with: ./deploy.ps1 -Preview" -ForegroundColor Green
+    return
+}
+
+# 5. Publish to GitHub Pages.
+#    -n  write .nojekyll (stop GitHub from running Jekyll over asset dirs)
+#    -o  no history: replace gh-pages with a single fresh commit each deploy, so
+#        the branch doesn't accumulate every past build's heavy notebook assets
+#    -f  force (required by -o), -p  push
+#    -r/-b  target remote/branch
+$msg = "Deploy site {0}" -f (Get-Date -Format 'yyyy-MM-dd HH:mm')
+Invoke-Step "Publishing docs/_build/html to $Remote/$Branch" {
+    uv run ghp-import docs/_build/html -n -o -f -p -r $Remote -b $Branch -m $msg
+}
+
+Write-Host "Deployed to $Remote/$Branch." -ForegroundColor Green
+Write-Host "Live (after Pages rebuilds): https://holukas.github.io/dataset_ch-fru_flux_product/" -ForegroundColor Green

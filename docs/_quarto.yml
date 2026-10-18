@@ -1,0 +1,132 @@
+project:
+  type: website
+  # Same output path as the sibling CH-LAE site, so the ghp-import publish flow
+  # and .gitignore (docs/_build/) are identical in both repos.
+  output-dir: _build/html
+
+# Show a "last updated" date on every page. `date-modified` renders under a
+# "Modified" label (vs "Published" for `date`), which reads correctly as
+# last-updated. Applied project-wide so it inherits into every page. Uses the
+# file's filesystem modification time (Quarto built-in), not the git commit date.
+date-modified: last-modified
+# Render dates as e.g. "15 July 2026" (day, full month name, year). Tokens are
+# Quarto's date-format tokens, not strftime. Applies to the "Modified" date the
+# _last-modified-sidebar.html partial reads and shows in the right sidebar.
+date-format: "D MMMM YYYY"
+
+website:
+  title: "CH-FRU Flux Product"
+  # Multi-resolution .ico (16/24/32/48/64/128/256): browsers pick the frame that
+  # fits, and the 16 px frame is drawn by hand rather than downscaled, so the tab
+  # icon stays legible. favicon.svg and favicon.png (512) sit alongside for reuse
+  # (social cards, apple-touch) but Quarto emits only one icon link, so they are
+  # not referenced here. All rasters are generated from logo.svg by
+  # _raw/render_mark.py.
+  favicon: favicon.ico
+  search: true
+  # Prev/next links at the bottom of each page, and a "back to top" control.
+  page-navigation: true
+  back-to-top-navigation: true
+  repo-url: https://github.com/holukas/dataset_ch-fru_flux_product
+  repo-actions: [source, issue]
+  # Author lives ONLY here in the footer, never as page `author` metadata (which
+  # would render it in each page's title block at the top).
+  page-footer: "Lukas Hörtnagl · © 2026"
+  # A website sidebar (unlike a book) is collapsible — it renders a collapse
+  # toggle so the left sidebar can be hidden.
+  sidebar:
+    style: floating
+    collapse-level: 1
+    # `logo`/`logo-alt` belong to the sidebar (or navbar), NOT to `website:`
+    # directly — Quarto rejects the project file outright if they sit a level up.
+    # Same mark as the favicon. It keeps its dark tile rather than a transparent
+    # background: the grass blades are near-white and would vanish against a
+    # light page, and the site renders in both a light and a dark theme.
+    logo: logo.png
+    logo-alt: "Meadow grass on the pre-alpine pasture at CH-FRU Früebüel"
+    # Structure mirrors the sibling CH-LAE flux-product site, so both repos can
+    # be expanded in parallel. Most pages are stubs to be filled in.
+    contents:
+      - index.md
+      - Overview.md
+      - Site_Info.md
+      # The per-variable detail pages are nested under Meteo_Data.md rather than
+      # listed beside it, so the sidebar collapses them. Same `section:`
+      # construction as FPC.qmd below, which keeps Meteo_Data.md itself a link
+      # rather than turning it into a bare heading. Listed in the same order as
+      # the parameter table at the top of Meteo_Data.md.
+      - section: Meteo_Data.md
+        contents:
+          - Meteo_Data_SW_IN.md
+          - Meteo_Data_TA.md
+          - Meteo_Data_PPFD_IN.md
+          - Meteo_Data_RH.md
+          - Meteo_Data_LW_IN.md
+          - Meteo_Data_VPD.md
+          - Meteo_Data_PREC.md
+          - Meteo_Data_SWC.md
+          - Meteo_Data_TS.md
+          - Meteo_Data_G.md
+          - Meteo_Data_SW_OUT.md
+          - Meteo_Data_LW_OUT.md
+      # Sits beside Meteo_Data rather than inside it: a dashboard covers one
+      # exported series, and the flux products will add their own. Each
+      # dashboard is a standalone HTML file built into the render output by
+      # deploy.ps1, not a Quarto page.
+      - Data_Dashboards.md
+      # .qmd, not .md: the page is meant to carry an executable ```{mermaid}
+      # cell, as in CH-LAE.
+      - Meteo_Product_Chain.qmd
+      - Management_Data.md
+      - section: FPC.qmd
+        contents:
+          - Raw_Data.md
+          - L0.md
+          - L1.md
+          - L2.md
+          - L3.1.md
+          - L3.2.md
+          - L3.3.md
+          - L4.1.md
+          - L4.2.md
+          - QCF.md
+      - Instrumentation.md
+      - Variables.md
+      - Supplementary.md
+      - Issues.md
+      - Software.md
+      - Links.md
+      - References.md
+      # Links to the notebook index built by build_notebooks.py, which lands at
+      # notebooks/index.html when `quarto render docs` renders the staged copies.
+      - text: Notebooks
+        href: notebooks/index.html
+      - Versions.md
+      - Yearly_Notes.md
+      - text: Repository
+        href: https://github.com/holukas/dataset_ch-fru_flux_product
+      - text: Open issue
+        href: https://github.com/holukas/dataset_ch-fru_flux_product/issues/new
+
+bibliography: references.bib
+
+format:
+  html:
+    # Light/dark theme pair — readers get a toggle in the navbar.
+    theme:
+      light: cosmo
+      dark: darkly
+    # Wide-table handling + minor tweaks (see styles.css).
+    css: styles.css
+    toc: true
+    # Click any image to open it enlarged in a lightbox overlay.
+    lightbox: auto
+    # Relocate the "Modified" date and the light/dark toggle into the right
+    # ("On this page") sidebar (both are client-side JS tweaks).
+    include-after-body:
+      - _last-modified-sidebar.html
+      - _theme-toggle.html
+      # Make the Mermaid flowcharts pannable and zoomable. `lightbox: auto`
+      # above cannot help there, because it works on <img> elements and Quarto
+      # renders a mermaid cell to an inline <svg>.
+      - _mermaid-zoom.html

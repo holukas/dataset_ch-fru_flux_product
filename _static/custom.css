@@ -1,4 +1,0 @@
-/* Hide "Made with MyST" branding in top nav */
-a.myst-home-link span {
-  display: none;
-}
