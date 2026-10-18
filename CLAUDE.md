@@ -1,87 +1,120 @@
-# CH-FRU Flux Dataset — Project Guide
+# CLAUDE.md
 
-## What this project is
+## What this repo is
 
-A Jupyter Book documenting the preparation of the CH-FRU eddy covariance grassland flux dataset:
-meteoscreening → outlier detection → gap-filling → final dataset.
+Methods documentation for the **CH-FRU flux product** — an eddy-covariance
+ecosystem-flux dataset for the grassland site CH-FRU (Früebüel). The actual flux
+computation and meteo screening happen in a separate offline pipeline; this
+repo's job is to **narrate the methods** used to produce the shared dataset and
+publish them as a website.
 
-The book is published as a static HTML site on GitHub Pages.
+**Sibling repo.** This repo is set up exactly like the CH-LAE flux product
+(`F:\dev\datasets\dataset_ch-lae_flux_product`), and both are expanded in
+parallel. Keep the machinery (Quarto config shape, `build_notebooks.py`, the
+PowerShell wrappers, the `workflow/` stage layout, the uv environment) identical
+in both; a change to the machinery in one repo belongs in the other too. Only the
+site-specific bindings differ — site code, titles, URLs, the external data path,
+the docs content and the site mark. CH-LAE's
+`.claude/skills/site-template/SKILL.md` lists them.
 
-## Environment
+## Layout
 
-- Python 3.12, managed with **uv**
-- Install: `uv sync --dev`
-- Local packages (editable): `diive` (`../../21 - DIIVE/diive`) and `dbc-influxdb` (`../../22 - POET/dbc-influxdb`)
+- `docs/` — the published Quarto website, with a single config file
+  `docs/_quarto.yml`. This is the reader-facing artifact and is kept clean. Only
+  pages listed in `_quarto.yml`'s `website.sidebar.contents` are in the nav.
+  Build output lands in `docs/_build/html/` (gitignored). The site mark
+  (`logo.*` for the sidebar, `favicon.*` for the tab icon) is the same artwork,
+  so the two must be regenerated together: `docs/logo.svg` is the source and
+  `uv run python docs/_raw/render_mark.py` writes every raster and the `.ico`,
+  whose 16 px frame is hand-drawn in that script and must be edited with the SVG.
+- `workflow/` — the real working notebooks and scripts, organized by numbered
+  stage. This is research scratch space: `build_notebooks.py` stages the
+  notebooks onto the site as an appendix behind the generated notebook index, but
+  they are not part of the curated narrative. Two reserved folders: `_archive/`
+  (dead/experimental, mirrors the stage layout) and `_templates/` (reusable
+  notebook templates).
+  - `workflow/_archive/10_METEO/` holds the notebooks of the earlier Jupyter Book
+    version of this repo (meteoscreening 2021-2025, the meteo downloads, merge and
+    gap-filling). They are kept for reference and are not rendered.
+- `PLAN.md` — what the dataset is to contain, what exists, and what is missing.
+  Read it before starting new work and update it when a stage's state changes. It
+  sits at the root rather than in `docs/` because Quarto would publish it; settled
+  sections move to `docs/Overview.md` and `docs/Variables.md` and are deleted
+  from `PLAN.md`, so the two never state the same thing twice.
 
-## Key commands
+## Where the detailed guidance lives
 
-```powershell
-# After adding/moving notebooks, regenerate myst.yml TOC
-uv run python generate_toc.py
+The bulk of this project's conventions are scoped to one part of the tree and
+live in a `CLAUDE.md` beside the work, so they load when that area is opened
+rather than in every session. Read the relevant one before working there.
 
-# Preview locally (live dev server, opens browser)
-uv run jupyter-book start
+- `workflow/00_L0_checks/CLAUDE.md` — Level-0 preliminary flux calculation.
+- `workflow/10_METEO/CLAUDE.md` — the meteo stage and its three substages.
+- `.claude/rules/docs.md` — the Quarto website: build mechanics, notebook
+  staging, markup conventions, and how the narrative and per-variable pages are
+  organized. (It lives here rather than as `docs/CLAUDE.md` because Quarto
+  renders every `.md` under `docs/` onto the public website.)
 
-# Clean build artifacts (requires -y to skip confirmation)
-uv run jupyter-book clean -y
+`.claude/` is **not in git**. It lives in the external data folder,
+`F:\Sync\luhk_work\dev-data\datasets-data\dataset_ch-fru_flux_product-data\.claude\`,
+and is linked into the repo root as a directory junction (gitignored), so Claude
+Code still finds it here. On a new machine, recreate the link from the repo root:
+`New-Item -ItemType Junction -Path .claude -Target <that folder>`.
 
-# Build static HTML for deployment (BASE_URL needed for GitHub Pages subpath)
-# On Windows (Git Bash / uv run):
-MSYS_NO_PATHCONV=1 BASE_URL="/dataset_ch-fru_flux_product" uv run jupyter-book build --html
+## Code/data layout and conventions
 
-# Deploy to GitHub Pages (after build --html)
-uv run ghp-import -n -p -f _build/html
-```
+Code lives in this repo under `workflow/`. The **data files it produces live in a
+separate, untracked folder** (not in git — too heavy):
+`F:\Sync\luhk_work\dev-data\datasets-data\dataset_ch-fru_flux_product-data\workflow\`.
+(The `notebooks\` folder beside it holds the outputs of the archived notebooks.)
 
-Note: `jupyter-book build` (without `--html`) builds JSON content only.
-`--html` produces the full static site in `_build/html/` needed for `ghp-import`.
+The two `workflow/` trees are **kept mirrored 1:1** — same stage folders, same
+instrument subfolders.
 
-## Project structure
+- **Numbering:** a data file carries the **same numeric prefix and relative path
+  as the notebook/script that produces it**. Code vs data is told apart by which
+  tree it is in, not by the number. (There is no odd/even offset.)
+- **Instruments:** where a stage processes more than one gas analyser, split into
+  one subfolder per analyser on both sides (CH-LAE uses `IRGA72/`/`IRGA75/`).
+- **Filenames:** no spaces, no `+` (use `_and_`).
+- **Figures stay in the repo** (`docs/images/` for published figures, a
+  `figures/` subfolder under the relevant `workflow/` stage for working plots);
+  only heavy data (`*.parquet`/`*.csv`/`*.pkl`) goes to the external data folder.
+- Raw inputs (`0_data/`) and `tests/` outputs live only in the external data
+  folder and are gitignored.
+- **The external data folder cannot be assumed present.** Where a notebook depends
+  on a value that lives there — a calibration constant, a date — declare the value
+  in the notebook with its source file named, use that declaration everywhere
+  downstream, and let the external file only **verify** it, behind an availability
+  guard. Results must never depend on whether the folder happened to be there.
 
-```
-myst.yml             # Jupyter Book 2 config + table of contents — DO NOT edit by hand, use generate_toc.py
-_config.yml          # Legacy JB1 config (kept for reference, not used by JB2)
-_toc.yml             # Legacy JB1 TOC (kept for reference, not used by JB2)
-generate_toc.py      # Script that auto-generates myst.yml from the notebooks/ folder
-docs/                # Markdown narrative pages — edit these in Obsidian
-notebooks/           # Jupyter notebooks (pre-built, outputs committed)
-  10_METEO/          # Meteoscreening notebooks
-    11_meteoscreening_diive_2021-2025/
-      G/ LW/ PPFD/ PREC/ RH/ SW/ SWC/ TA/ TS/   # per-variable, grouped by type
-    12.x_  13.x_  16.x_  A1_  A3_                # download, merge, gap-filling
-data/                # gitignored — raw and intermediate data files
-```
+## Writing register
 
-## Notebooks — important rules
+- **Register: this is scientific documentation. Headings and prose stay neutral
+  and professional.** No colloquialisms, no jokes, no second-person warnings
+  dressed up as banter. Write `## Known limitations`, not
+  `## What will bite you`; `reads approximately 25 % low`, not `reads a quarter
+  low`; `their gaps are retained`, not `their gaps stay gaps`. The register is
+  that of a data-product manual a stranger will cite, not that of a commit
+  message. This applies to the published `docs/` pages **and** to notebook
+  markdown, since the notebooks render as site pages too. Direct imperatives
+  addressed to the reader (`Filter on the flag before …`) are fine and are not
+  what this rules out.
 
-- **Pre-built**: `execute_notebooks: "off"` in `_config.yml`. Run notebooks locally in Jupyter, save with outputs, commit the `.ipynb`.
-- **Never commit checkpoint files**: `.ipynb_checkpoints/` is gitignored.
-- **Data files** (`.csv`, `.parquet`, `.zip`) live in `data/` or stay gitignored — do not commit them inside `notebooks/`.
-- **Excluded from TOC**: `_TEMPLATE_/` folder and files with `x-` prefix (deprecated/scratch).
+## Hard rules
 
-## Writing prose
-
-- Point an Obsidian vault at the `docs/` folder.
-- Files are plain Markdown (CommonMark). MyST directives like ` ```{note} ` show as code fences in Obsidian but render correctly in the book.
-
-## Adding new notebooks
-
-1. Place the notebook in the appropriate `notebooks/` subfolder.
-2. Run `uv run python generate_toc.py` to update `_toc.yml`.
-3. Build and verify: `uv run jupyter-book build .`
-
-## GitHub Pages
-
-- Repo: `https://github.com/holukas/dataset-ch-fru-flux-product`
-- Pages branch: `gh-pages` (managed by `ghp-import`)
-- Enable in repo Settings → Pages → Source: `gh-pages` branch
-
-## Dependencies
-
-| Package | Purpose |
-|---|---|
-| `jupyter-book>=2.1.5` | Book builder (Sphinx-based) |
-| `ghp-import>=2.1.0` | Deploy `_build/html` to `gh-pages` branch |
-| `sphinxcontrib-mermaid` | Mermaid diagram support in book |
-| `diive` | Flux data processing (local editable) |
-| `dbc-influxdb` | InfluxDB data access (local editable) |
+- **Never commit or push without being asked.** `git commit` and `git push` run
+  only on an explicit request; never as the closing step of a task, and never to
+  tidy up a working tree. Staging, diffing and reading the log need no request.
+- **Never build the docs** (`quarto render`/`quarto preview`, or
+  `build_notebooks.py`) unless explicitly asked. A full site build is
+  `build_notebooks.py` (stage) **then** `quarto render docs` **then**
+  `build_notebooks.py --clean`, in that order (or just run `deploy.ps1`).
+- **Never write a real person's name into this repo.** A site fieldbook and the
+  logger programs are personnel records and these notebooks render to a public
+  website, so every quoted string is redacted through `redact_people()`, and
+  names in prose and code comments count too — use a pseudonym or an invented
+  name. `python check_no_names.py` scans the repo and exits non-zero; run it
+  before publishing. It reads the redaction map from
+  `...\dataset_ch-fru_flux_product-data\fieldbook_gin\redact_names.csv` and
+  raises while that map does not exist yet.
