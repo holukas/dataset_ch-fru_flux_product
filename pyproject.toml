@@ -3,23 +3,30 @@ name = "dataset-ch-fru-flux-product"
 version = "0.1.0"
 description = "Dataset for grassland CH-FRU"
 authors = [
-    { name = "Lukas Hörtnagl", email = "lukas.hoertnagl@usys.ethz.ch" }
+    {name = "Lukas Hörtnagl", email = "lukas.hoertnagl@usys.ethz.ch"}
 ]
-requires-python = ">=3.12"
-dependencies = []
+readme = "README.md"
+requires-python = ">=3.12,<3.14"
+dependencies = [
+    # [db] pulls in influxdb-client, which diive's InfluxIO needs to reach the
+    # database. diive also exposes this as its own 'db' dependency group, but
+    # groups are not transitive — only the extra is reachable from here.
+    "diive[db]",
+    # Theil-Sen slopes and Kendall's tau for trend figures. It arrives
+    # transitively through diive, but notebooks import it directly, so it is
+    # declared. Kept in step with the sibling CH-LAE repo.
+    "scipy>=1.11",
+]
+
+[dependency-groups]
+dev = [
+    "ghp-import>=2.1.0,<3.0.0",
+    "jupyterlab>=4.5.7",
+    "quarto-cli>=1.5",
+]
 
 [tool.uv]
 package = false
 
-[dependency-groups]
-dev = [
-    "diive",
-    "dbc-influxdb",
-    "ghp-import>=2.1.0",
-    "jupyter-book>=2.1.5",
-    "sphinxcontrib-mermaid>=1.2.3",
-]
-
 [tool.uv.sources]
-diive = { path = "../../21 - DIIVE/diive", editable = true }
-dbc-influxdb = { path = "../../22 - POET/dbc-influxdb", editable = true }
+diive = { path = "../../diive", editable = true }
